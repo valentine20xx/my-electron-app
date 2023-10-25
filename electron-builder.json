@@ -1,0 +1,15 @@
+{
+  "appId": "de.niko.MyElectron",
+  "productName": "My electron",
+  "win": {
+    "target": [
+      {
+        "target": "zip",
+        "arch": [
+          "x64"
+        ]
+      }
+    ]
+  },
+  "npmArgs": "--workspaces=false"
+}
