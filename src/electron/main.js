@@ -2,20 +2,19 @@ const {app, BrowserWindow, dialog, Menu} = require("electron");
 const {join} = require("path");
 const {readFile, writeFileSync} = require("fs");
 const {Packer} = require("docx");
-const {getDoc} = require("./module1");
+// const {getDoc} = require("./module1");
 
 const createWindow = () => {
     const browserWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
-            preload: join(__dirname, 'preload.js'),
-            nodeIntegration: true
+            preload: join(__dirname, 'preload.js')
         },
         show: false
     })
 
-    browserWindow.loadFile('index.html').then(r => {
+    browserWindow.loadFile('../front-end/index.html').then(r => {
         console.log("index.html loaded")
     })
 
@@ -32,7 +31,7 @@ const createWindow = () => {
 
     browserWindow.show();
 
-    // browserWindow.webContents.toggleDevTools();
+    browserWindow.webContents.openDevTools({ mode: 'detach' });
 }
 
 app.whenReady().then(() => {
