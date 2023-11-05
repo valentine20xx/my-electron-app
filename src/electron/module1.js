@@ -1,5 +1,5 @@
 const docx = require("docx");
-const getDoc = function () {
+const getDoc = function (name, surname) {
     return new docx.Document({
         sections: [
             {
@@ -7,17 +7,22 @@ const getDoc = function () {
                 children: [
                     new docx.Paragraph({
                         children: [
-                            new docx.TextRun("Hello World"),
+                            new docx.TextRun("Name: "),
                             new docx.TextRun({
-                                text: "Foo Bar",
+                                text: name,
                                 bold: true,
-                            }),
-                            new docx.TextRun({
-                                text: "\tGithub is the best",
-                                bold: true,
-                            }),
+                            })
                         ],
                     }),
+                    new docx.Paragraph({
+                        children: [
+                            new docx.TextRun("Surname: "),
+                            new docx.TextRun({
+                                text: surname,
+                                bold: true,
+                            })
+                        ],
+                    })
                 ],
             },
         ],

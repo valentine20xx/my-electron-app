@@ -1,11 +1,14 @@
-const {app, BrowserWindow, dialog, Menu} = require("electron");
+const {app, BrowserWindow, dialog, Menu, ipcMain, ipcRenderer} = require("electron");
 const {join} = require("path");
 const {readFile, writeFileSync} = require("fs");
 const {Packer} = require("docx");
-// const {getDoc} = require("./module1");
+const {getDoc} = require("./module1");
 
+const SAVE_DOCX_1 = 'save-docx-electron-to-web';
+const SAVE_DOCX_2 = 'save-docx-web-to-electron';
+let browserWindow;
 const createWindow = () => {
-    const browserWindow = new BrowserWindow({
+    browserWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -31,10 +34,35 @@ const createWindow = () => {
 
     browserWindow.show();
 
-    browserWindow.webContents.openDevTools({ mode: 'detach' });
+    browserWindow.webContents.openDevTools({mode: 'detach'});
 }
 
 app.whenReady().then(() => {
+    ipcMain.on(SAVE_DOCX_2, (event, args) => {
+        dialog.showSaveDialog({
+            title: "Save docx file",
+            filters: [{name: "Docx file", extensions: ["docx"]}]
+        }).then(saveDialogReturnValue => {
+            const filePath = saveDialogReturnValue.filePath;
+            const canceled = saveDialogReturnValue.canceled;
+
+            console.log("filePath", filePath);
+            console.log("canceled", canceled);
+
+            if (!canceled) {
+                const name = args.name;
+                const surname = args.surname;
+
+                const doc = getDoc(name, surname);
+
+                Packer.toBuffer(doc).then((buffer) => {
+                    writeFileSync(filePath, buffer);
+                });
+            }
+        })
+
+    })
+
     createWindow()
 })
 
@@ -90,12 +118,6 @@ const menuTemplate = [{
 
                     console.log("filePath", filePath);
                     console.log("canceled", canceled);
-
-                    const doc = getDoc();
-
-                    Packer.toBuffer(doc).then((buffer) => {
-                        writeFileSync(filePath, buffer);
-                    });
                 })
             }
         },
@@ -107,6 +129,14 @@ const menuTemplate = [{
             role: 'quit'
         }
     ]
+}, {
+    label: 'Generate',
+    submenu: [{
+        label: 'Report',
+        click: () => {
+            browserWindow.webContents.send(SAVE_DOCX_1);
+        }
+    }]
 }];
 
 const menu = Menu.buildFromTemplate(menuTemplate)
