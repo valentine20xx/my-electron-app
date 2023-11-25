@@ -24,7 +24,7 @@ const Article = () => {
     return React.createElement(MaterialUI.Box, {className: "screen"}, nameTextField, surnameTextField)
 }
 const Footer = () => {
-    return React.createElement(MaterialUI.Box, {className: "footer"}, "footer")
+    return React.createElement(MaterialUI.Box, {className: "footer", id: "footer"}, "footer")
 }
 
 const Main = React.createElement(MaterialUI.Box, {className: "main"}, Article(), Footer())
@@ -32,11 +32,3 @@ const Main = React.createElement(MaterialUI.Box, {className: "main"}, Article(),
 const root = document.getElementById('root')
 const reactRoot = ReactDOM.createRoot(root)
 reactRoot.render(Main);
-// const func = async () => {
-//     const response = await window.versions.ping()
-//     console.log(response) // prints out 'pong'
-// }
-//
-// func()
-
-// window.addEventListener()

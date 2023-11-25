@@ -1,8 +1,8 @@
 {
   "name": "my-electron-app",
   "version": "1.0.0",
-  "description": "Hello World!",
-  "author": "Jane Doe",
+  "description": "We will generate some docx-files!",
+  "author": "Niko",
   "license": "MIT",
   "main": "src/electron/main.js",
   "scripts": {

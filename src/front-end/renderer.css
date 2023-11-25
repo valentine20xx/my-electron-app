@@ -1,3 +1,22 @@
+html {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -9,12 +28,13 @@
     flex-direction: column;
     flex-grow: 1;
     gap: 1em;
-    margin: 0.5em;
+    margin: 1em 0.5em 0.5em 0.5em;
 }
 
 .footer {
     display: flex;
     flex-direction: row;
-    background-color: rgb(128, 128, 128);
-    padding: 0.5em;
+    background-color: rgb(41, 42, 45);
+    color: white;
+    padding: 0.25em;
 }

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html style="height: 100vh; display: flex; flex-direction: column">
+<html>
 <head>
     <meta charset="UTF-8">
-    <!--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">-->
-    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';">
+    <title>Docx generator</title>
     <link rel="stylesheet" href="renderer.css">
     <script src="react.production.min.js"></script>
     <script src="react-dom.production.min.js"></script>
     <script src="material-ui.production.min.js"></script>
+    <script src="renderer.js" defer></script>
 </head>
-<body style="display: flex; flex-direction: column; flex-grow: 1; margin: 0">
-<div id="root" style="display: flex; flex-direction: column; flex-grow: 1"></div>
-<script src="renderer.js"></script>
+<body>
+<div id="root"></div>
 </body>
 </html>

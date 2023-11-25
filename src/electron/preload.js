@@ -15,3 +15,12 @@ ipcRenderer.on(SAVE_DOCX_1, (event, args) => {
 
     ipcRenderer.send(SAVE_DOCX_2, {name: name, surname: surname})
 })
+
+window.addEventListener('DOMContentLoaded', () => {
+    const strArray = [];
+    for (const dependency in process.versions) {
+        strArray.push(`${dependency}: ${process.versions[dependency]}`)
+    }
+
+    console.log(`environment-info: [${strArray.join(", ")}]`);
+})

@@ -1,7 +1,5 @@
-##### Build exe
+# Docx generator (React + Docx + Electron)
 
-```
-npm run pack
-```
+Small electron application, that uses React and generate small docx file.
 
-https://docx.js.org/
+- Docx library: https://docx.js.org/
