@@ -5,7 +5,7 @@
   "compilerOptions": {
     "declaration": true,
     "isolatedModules": true,
-    "module": "NodeNext",
+    "module": "CommonJS",
     "noImplicitAny": false,
     "sourceMap": true,
     "outDir": "dist",

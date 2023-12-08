@@ -39,9 +39,6 @@ module.exports = {
 
     ],
     devServer: {
-        // static: {
-        //     directory: path.join(__dirname, 'dist'),
-        // },
-        port: 9000,
+        port: 9000
     },
 };

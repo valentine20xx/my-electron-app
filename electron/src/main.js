@@ -17,7 +17,10 @@ const createWindow = () => {
         show: false
     })
 
-    browserWindow.loadFile('../front-end/index.html').then(r => {
+    // browserWindow.loadFile('../front-end/index.html').then(r => {
+    //     console.log("index.html loaded")
+    // })
+    browserWindow.loadFile('../../app/dist/index.html').then(r => {
         console.log("index.html loaded")
     })
 
@@ -39,6 +42,8 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     ipcMain.on(SAVE_DOCX_2, (event, args) => {
+        dialog.showMessageBox({message: JSON.stringify(args)})
+
         dialog.showSaveDialog({
             title: "Save docx file",
             filters: [{name: "Docx file", extensions: ["docx"]}]

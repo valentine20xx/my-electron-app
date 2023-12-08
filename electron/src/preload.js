@@ -10,10 +10,16 @@ contextBridge.exposeInMainWorld('versions', {
 })
 
 ipcRenderer.on(SAVE_DOCX_1, (event, args) => {
-    const name = sessionStorage.getItem("name");
-    const surname = sessionStorage.getItem("surname");
+    // const name = sessionStorage.getItem("name");
+    // const surname = sessionStorage.getItem("surname");
 
-    ipcRenderer.send(SAVE_DOCX_2, {name: name, surname: surname})
+    const contextString = sessionStorage.getItem("context");
+    const context = JSON.parse(contextString);
+    console.log(context)
+    console.log(context.name)
+    console.log(context.surname)
+
+    ipcRenderer.send(SAVE_DOCX_2, {name: context.name, surname: context.surname})
 })
 
 window.addEventListener('DOMContentLoaded', () => {
