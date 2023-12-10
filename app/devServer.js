@@ -6,10 +6,10 @@ const compiler = Webpack(webpackConfig);
 const devServerOptions = {...webpackConfig.devServer};
 const devServer = new WebpackDevServer(devServerOptions, compiler);
 
-const runServer = async () => {
+const runServer = () => {
     console.log('Starting devServer...');
 
-    await devServer.startCallback(() => {
+    devServer.startCallback(() => {
         console.log('DevServer successfully started...');
     });
 };

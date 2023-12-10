@@ -1,4 +1,4 @@
-const {app, BrowserWindow, dialog, Menu, ipcMain, ipcRenderer} = require("electron");
+const {app, BrowserWindow, dialog, Menu, ipcMain} = require("electron");
 const {join} = require("path");
 const {readFile, writeFileSync} = require("fs");
 const {Packer} = require("docx");
@@ -14,15 +14,26 @@ const createWindow = () => {
         webPreferences: {
             preload: join(__dirname, 'preload.js')
         },
+        icon: join(__dirname, '/media/contract_78463.png'),
         show: false
     })
 
-    // browserWindow.loadFile('../front-end/index.html').then(r => {
-    //     console.log("index.html loaded")
-    // })
-    browserWindow.loadFile('../../app/dist/index.html').then(r => {
-        console.log("index.html loaded")
-    })
+    console.log(process.env.STAGE)
+
+    if (process.env.STAGE === "dev") {
+        browserWindow.loadFile('../../app/dist/index.html').then(r => {
+            console.log("index.html loaded", r)
+        })
+        browserWindow.webContents.openDevTools({mode: 'detach'});
+    } else {
+        browserWindow.loadFile('app/index.html').then(r => {
+            console.log("index.html loaded", r)
+        })
+    }
+    // else {
+    //     // new Error("process.env.STAGE is not set")
+    //     dialog.showMessageBox({message: "process.env.STAGE is not set"})
+    // }
 
     browserWindow.on('close', (e) => {
         let response = dialog.showMessageBoxSync(browserWindow, {
@@ -37,13 +48,11 @@ const createWindow = () => {
 
     browserWindow.show();
 
-    browserWindow.webContents.openDevTools({mode: 'detach'});
+
 }
 
 app.whenReady().then(() => {
     ipcMain.on(SAVE_DOCX_2, (event, args) => {
-        dialog.showMessageBox({message: JSON.stringify(args)})
-
         dialog.showSaveDialog({
             title: "Save docx file",
             filters: [{name: "Docx file", extensions: ["docx"]}]

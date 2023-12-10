@@ -1,10 +1,21 @@
 {
-  "appId": "de.niko.MyElectron",
-  "productName": "My electron",
+  "appId": "de.niko.MyElectronApp",
+  "productName": "My electron app",
+  "files": {
+    "from": "**/*"
+  },
   "win": {
+    "files": [
+      "src/",
+      {
+        "from": "../app/dist",
+        "to": "app",
+        "filter": ["**/*"]
+      }
+    ],
     "target": [
       {
-        "target": "zip",
+        "target": "portable",
         "arch": [
           "x64"
         ]

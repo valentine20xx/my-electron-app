@@ -4,10 +4,10 @@
   "description": "We will generate some docx-files!",
   "author": "Niko",
   "license": "MIT",
-  "main": "src/electron/main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron src/main.js",
-    "electron-package": "electron-builder --dir",
+    "electron-start": "set STAGE=dev&& electron src/main.js",
+    "electron-package": "set STAGE=prod&& electron-builder --dir",
     "electron-distribution": "electron-builder"
   },
   "devDependencies": {

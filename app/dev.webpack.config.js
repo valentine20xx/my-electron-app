@@ -9,13 +9,19 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
+                use: {
+                    loader: 'ts-loader',
+                    options: {
+                        configFile: "tsconfig-dev.json"
+                    }
+                },
+                exclude: /node_modules/
             },
             {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
+                test: /\.(sass|scss|css)$/,
+                use: ['style-loader', 'css-loader', 'sass-loader'],
             },
+
             {
                 test: /\.(js|jsx|tsx)$/,
                 exclude: /node_modules/,
@@ -33,7 +39,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: "src/index.html",
-            minify: true,
+            minify: false,
             filename: "index.html"
         }),
 
